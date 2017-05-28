@@ -42,6 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\ClassicMode.cs" />
+    <Compile Include="Model\IGame.cs" />
+    <Compile Include="Model\QuantumMode.cs" />
+    <Compile Include="Model\QuantumTile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

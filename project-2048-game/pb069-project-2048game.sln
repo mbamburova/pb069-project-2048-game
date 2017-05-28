@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+VisualStudioVersion = 15.0.26228.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pb069-project-2048game", "pb069-project-2048game.csproj", "{5A699986-8C15-4C2A-AABF-848A4DAE50F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2048game", "..\2048game\2048game.csproj", "{86CEC3F3-D26F-44EC-96AF-43F13B9430D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2048projectTests", "..\2048projectTests\2048projectTests.csproj", "{4A4DF552-F8F7-431D-B920-6E4A6BA648AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{5A699986-8C15-4C2A-AABF-848A4DAE50F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A699986-8C15-4C2A-AABF-848A4DAE50F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A699986-8C15-4C2A-AABF-848A4DAE50F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86CEC3F3-D26F-44EC-96AF-43F13B9430D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86CEC3F3-D26F-44EC-96AF-43F13B9430D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86CEC3F3-D26F-44EC-96AF-43F13B9430D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86CEC3F3-D26F-44EC-96AF-43F13B9430D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A4DF552-F8F7-431D-B920-6E4A6BA648AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A4DF552-F8F7-431D-B920-6E4A6BA648AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A4DF552-F8F7-431D-B920-6E4A6BA648AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A4DF552-F8F7-431D-B920-6E4A6BA648AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
