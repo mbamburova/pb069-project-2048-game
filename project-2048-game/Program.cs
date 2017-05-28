@@ -19,7 +19,7 @@ namespace pb069_project_2048game
             classic.MoveLeft();
             PrintClassic(classic);
             
-            Console.Write("Up");
+            Console.WriteLine("Up");
             classic.MoveUp();
             PrintClassic(classic);
 
@@ -45,7 +45,7 @@ namespace pb069_project_2048game
             quantum.MoveLeft();
             PrintQuantum(quantum);
 
-            Console.Write("Up");
+            Console.WriteLine("Up");
             quantum.MoveUp();
             PrintQuantum(quantum);
 
@@ -61,8 +61,6 @@ namespace pb069_project_2048game
             quantum.CreateNewGame();
             PrintQuantum(quantum);
             Console.ReadKey();
-
-
 
         }
 

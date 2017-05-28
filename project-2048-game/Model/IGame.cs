@@ -15,8 +15,10 @@ namespace pb069_project_2048game.Model
         void MoveUp();
 
         void MoveDown();
-        
-        
+
+        void CreateNewGame();
+
+        bool CheckWin();
 
     }
 }

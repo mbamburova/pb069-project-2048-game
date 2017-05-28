@@ -12,40 +12,104 @@ namespace pb069_project_2048game.Model
         public int[][] Board { get; set; }
 
         public int Score { get; set; }
-
-        public bool IsWon { get; set; } = false;
-
-
+        
+    
         public ClassicMode()
         {
-           Initialize(Board);
+           Initialize();
+        }
+       
+        public void MoveLeft()
+        {
+            for (var row = 0; row < 4; row++)
+            {
+                Board[row] = Move(Board[row]);
+            }
+            AddRandomTile();
         }
 
-        public void Initialize(int[][] board)
+        public void MoveRight()
+        {
+
+            TransposeAndRotateBoard(Board);
+            TransposeAndRotateBoard(Board);
+            for (var row = 0; row < 4; row++)
+            {
+                Board[row] = Move(Board[row]);
+            }
+            TransposeAndRotateBoard(Board);
+            TransposeAndRotateBoard(Board);
+
+            AddRandomTile();
+        }
+
+        public void MoveUp()
+        {
+            TransposeAndRotateBoard(Board);
+            TransposeAndRotateBoard(Board);
+            TransposeAndRotateBoard(Board);
+            for (var row = 0; row < 4; row++)
+            {
+                Board[row] = Move(Board[row]);
+            }
+            TransposeAndRotateBoard(Board);
+
+            AddRandomTile();
+        }
+
+        public void MoveDown()
+        {
+            TransposeAndRotateBoard(Board);
+            for (var row = 0; row < 4; row++)
+            {
+                Board[row] = Move(Board[row]);
+            }
+            TransposeAndRotateBoard(Board);
+            TransposeAndRotateBoard(Board);
+            TransposeAndRotateBoard(Board);
+
+            AddRandomTile();
+        }
+
+        public bool CheckWin()
+        {
+            return Score == 2048;
+        }
+
+        public void CreateNewGame()
+        {
+            Initialize();
+            Score = 0;
+        }
+
+        #region Helper methods 
+
+        private void Initialize()
         {
             Board = new int[4][];
-            for (var i = 0; i < 4; i++)  
+            for (var i = 0; i < 4; i++)
             {
-                Board[i] = new int[4] {0, 0, 0, 0};
+                Board[i] = new [] { 0, 0, 0, 0 };
             }
 
             AddRandomTile();
             AddRandomTile();
         }
 
-        public void AddRandomTile()
+        private void AddRandomTile()
         {
+            var rand = new Random();
             int randRow, randCol;
 
             do
             {
-                randRow = new Random().Next(0, 3);
-                randCol = new Random().Next(0, 3);
+                randRow = rand.Next(0, 3);
+                randCol = rand.Next(0, 3);
             } while (Board[randRow][randCol] != 0);
-            Board[randRow][randCol] = 4 / new Random().Next(1, 3);
+            Board[randRow][randCol] = 4 / rand.Next(1, 3);
         }
 
-        public int[] Move(IEnumerable<int> row) // move row to left
+        private int[] Move(IEnumerable<int> row)
         {
             var newRow = new int[4];
             var j = 0;
@@ -83,7 +147,7 @@ namespace pb069_project_2048game.Model
             return newRow;
         }
 
-        public void TransposeAndRotateBoard(int[][] board)
+        private void TransposeAndRotateBoard(int[][] board)
         {
             var length = board[0].Length;
             var retVal = new int[length][];
@@ -95,73 +159,11 @@ namespace pb069_project_2048game.Model
             CopyToBoard(retVal);
         }
 
-        public void CopyToBoard(int[][] retVal)
+        private void CopyToBoard(int[][] retVal)
         {
-            // really deep copy?
             Board = retVal.Select(x => x.ToArray()).ToArray();
         }
-        
-        public void MoveLeft()
-        {
-            for (int row = 0; row < 4; row++)
-            {
-                Board[row] = Move(Board[row]);
-            }
-            AddRandomTile();
-        }
 
-        public void MoveRight()
-        {
-
-            TransposeAndRotateBoard(Board);
-            TransposeAndRotateBoard(Board);
-            for (int row = 0; row < 4; row++)
-            {
-                Board[row] = Move(Board[row]);
-            }
-            TransposeAndRotateBoard(Board);
-            TransposeAndRotateBoard(Board);
-
-            AddRandomTile();
-        }
-
-        public void MoveUp()
-        {
-            TransposeAndRotateBoard(Board);
-            TransposeAndRotateBoard(Board);
-            TransposeAndRotateBoard(Board);
-            for (var row = 0; row < 4; row++)
-            {
-                Board[row] = Move(Board[row]);
-            }
-            TransposeAndRotateBoard(Board);
-
-            AddRandomTile();
-        }
-
-        public void MoveDown()
-        {
-            TransposeAndRotateBoard(Board);
-            for (int row = 0; row < 4; row++)
-            {
-                Board[row] = Move(Board[row]);
-            }
-            TransposeAndRotateBoard(Board);
-            TransposeAndRotateBoard(Board);
-            TransposeAndRotateBoard(Board);
-
-            AddRandomTile();
-        }
-
-        public bool CheckIfIsWon(int[][] board)
-        {
-            return !Board.Any(x => x.Any(y => y > 2048)) && Board.Any(x => x.Any(y => y == 2048));
-        }
-
-        public void CreateNewGame()
-        {
-            Initialize(Board);
-            Score = 0;
-        }
+        #endregion
     }
 }
