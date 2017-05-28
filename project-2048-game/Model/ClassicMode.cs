@@ -33,6 +33,18 @@ namespace pb069_project_2048game.Model
             AddRandomTile();
         }
 
+        public void AddRandomTile()
+        {
+            int randRow, randCol;
+
+            do
+            {
+                randRow = new Random().Next(0, 3);
+                randCol = new Random().Next(0, 3);
+            } while (Board[randRow][randCol] != 0);
+            Board[randRow][randCol] = 4 / new Random().Next(1, 3);
+        }
+
         public int[] Move(IEnumerable<int> row) // move row to left
         {
             var newRow = new int[4];
@@ -69,18 +81,6 @@ namespace pb069_project_2048game.Model
                 newRow[j] = (int)previous;
             }
             return newRow;
-        }
-
-        public void AddRandomTile()
-        {
-            int randRow, randCol;
-            
-            do
-            {
-                randRow = new Random().Next(0, 3);
-                randCol = new Random().Next(0, 3);
-            } while (Board[randRow][randCol] != 0);
-            Board[randRow][randCol] = 4 / new Random().Next(1, 2);
         }
 
         public void TransposeAndRotateBoard(int[][] board)
@@ -156,6 +156,12 @@ namespace pb069_project_2048game.Model
         public bool CheckIfIsWon(int[][] board)
         {
             return !Board.Any(x => x.Any(y => y > 2048)) && Board.Any(x => x.Any(y => y == 2048));
+        }
+
+        public void CreateNewGame()
+        {
+            Initialize(Board);
+            Score = 0;
         }
     }
 }

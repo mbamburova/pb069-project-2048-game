@@ -24,40 +24,42 @@ namespace pb069_project_2048game.Model
 
             for (var i = 0; i < 4; i++)
             {
-                Board[i] = new QuantumTile[4];
+                Board[i] = new QuantumTile[4] {new QuantumTile(), new QuantumTile(), new QuantumTile(), new QuantumTile()};
             }
 
             AddRandomTile();
             AddRandomTile();
         }
 
-        public void AddRandomTile()
+        private void AddRandomTile()
         {
             int randomRow;
             int randomCol;
             do
             {
-                randomRow = new Random().Next(0, 3);
-                randomCol = new Random().Next(0, 3);
-            } while (Board[randomRow][randomCol].TileSet.Count.Equals(0));
+                randomRow = new Random().Next(0, 4);
+                randomCol = new Random().Next(0, 4);
+            } while (!Board[randomRow][randomCol].TileSet.Count.Equals(0));
 
             var randomCount = new Random().Next(1, 3);
-            for (var i = 0; i < randomCount; i++)
+            for (var i = 0; i <= randomCount; i++)
             {
-                Board[randomRow][randomCol].TileSet.Add(4 / new Random().Next(1, 2));
+                Board[randomRow][randomCol].TileSet.Add(4 / new Random().Next(1, 3));
             }
         }
 
         // vráti riadok po pohybe
-        public QuantumTile[] MoveRow(QuantumTile[] row) // to the left
+        private 
+            QuantumTile[] MoveRow(QuantumTile[] row) // to the left
         {
+            ShiftTiles(row);
             QuantumTile[][] subResults = new QuantumTile[3][];
             var matched = false;
             var countOfSubResults = 0;
 
             for (var i = 0; i < 3; i++)
             {
-                subResults[i] = new QuantumTile[3];
+                subResults[i] = new QuantumTile[3] { new QuantumTile(), new QuantumTile(), new QuantumTile() };
             }
             
             var temp = GetMatchOfTiles(row[0], row[1]);
@@ -91,13 +93,38 @@ namespace pb069_project_2048game.Model
             return matched == false ? row : MergeRowResults(subResults);
         }
 
+        private void ShiftTiles(QuantumTile[] row)
+        {
+            var temp = 0;
+            while (temp != row.Length)
+            {
+                if (row[temp].TileSet.Count == 0)
+                {
+                    for (var j = temp; j < row.Length; j++)
+                    {
+                        if (row[j].TileSet.Count != 0)
+                        {
+                            row[temp] = row[j];
+                            row[j] = new QuantumTile();
+                            break;
+                        }
+                    }
+                    temp++;
+                }
+                else
+                {
+                    temp++;
+                }
+            }
+        }
+
         public QuantumTile[] MergeRowResults(QuantumTile[][] subResults)
         {
-           var mergedResults = new QuantumTile[4];
+           var mergedResults = new QuantumTile[4] {new QuantumTile(), new QuantumTile(), new QuantumTile(), new QuantumTile()};
             
             for (var i = 0; i < subResults.GetLength(0); i++) // cez pocet subresults
             {
-                for (var j = 0; j < subResults.GetUpperBound(1); j++) //3
+                for (var j = 0; j < subResults.Length; j++) //3
                 {
                     mergedResults[i].TileSet.UnionWith(subResults[j][i].TileSet);
                 }
@@ -110,7 +137,8 @@ namespace pb069_project_2048game.Model
             var matchedTile = new QuantumTile();
            
             var tileArray = tile1.TileSet.ToArray();
-            foreach (var t in tileArray) {
+            foreach (var t in tileArray)
+            {
                 if (tile2.TileSet.Contains(t))
                 {
                     matchedTile.TileSet.Add(2*t);
@@ -185,6 +213,9 @@ namespace pb069_project_2048game.Model
             TransposeAndRotateBoard(Board);
             AddRandomTile();
         }
-
+        public void CreateNewGame()
+        {
+            Initialize(Board);
+        }
     }
 }

@@ -14,6 +14,11 @@ namespace _2048projectTests.Model
         [TestMethod()]
         public void MoveRowTest()
         {
+            IGame classic = new ClassicMode();
+            
+
+
+
             Assert.Fail();
         }
     }
