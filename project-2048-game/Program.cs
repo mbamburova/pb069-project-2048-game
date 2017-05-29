@@ -12,63 +12,62 @@ namespace pb069_project_2048game
     {
         static void Main(string[] args)
         {
-            ClassicMode classic = new ClassicMode();
+            Console.WriteLine("Classic mode");
+            var classic = new ClassicMode();
             PrintClassic(classic);
             
-            Console.WriteLine("Left");
+            Console.WriteLine("Classic Left");
             classic.MoveLeft();
             PrintClassic(classic);
             
-            Console.WriteLine("Up");
+            Console.WriteLine("Classic Up");
             classic.MoveUp();
             PrintClassic(classic);
 
-            Console.WriteLine("Down");
+            Console.WriteLine("Classic Down");
             classic.MoveDown();
             PrintClassic(classic);
 
-            Console.WriteLine("Right");
+            Console.WriteLine("Classic Right");
             classic.MoveRight();
             PrintClassic(classic);
 
-            Console.WriteLine("New Game");
+            Console.WriteLine("Classic New Game");
             classic.CreateNewGame();
             PrintClassic(classic);
-
-            // ------------------------------------------------------
+            
             // Quantum Mode
             Console.WriteLine("Quantum mode");
-            QuantumMode quantum = new QuantumMode();
+            var quantum = new QuantumMode();
             PrintQuantum(quantum);
 
-            Console.WriteLine("Left");
+            Console.WriteLine("Quantum Left");
             quantum.MoveLeft();
             PrintQuantum(quantum);
 
-            Console.WriteLine("Up");
+            Console.WriteLine("Quantum Up");
             quantum.MoveUp();
             PrintQuantum(quantum);
 
-            Console.WriteLine("Down");
+            Console.WriteLine("Quantum Down");
             quantum.MoveDown();
             PrintQuantum(quantum);
 
-            Console.WriteLine("Right");
+            Console.WriteLine("Quantum Right");
             quantum.MoveRight();
             PrintQuantum(quantum);
 
-            Console.WriteLine("New Game");
+            Console.WriteLine("Quantum New Game");
             quantum.CreateNewGame();
             PrintQuantum(quantum);
             Console.ReadKey();
-
         }
 
         public static void PrintClassic(ClassicMode classicMode)
         {
-            for (int i = 0; i <= classicMode.Board.GetUpperBound(0); i++)
+            for (var i = 0; i <= classicMode.Board.GetUpperBound(0); i++)
             {
-                for (int j = 0; j < classicMode.Board.Length; j++)
+                for (var j = 0; j < classicMode.Board.Length; j++)
                 {
                     Console.Write(" | ");
                     Console.Write(classicMode.Board[i][j]);
@@ -78,32 +77,34 @@ namespace pb069_project_2048game
                 Console.WriteLine();
             }
             Console.WriteLine();
-            Console.WriteLine(classicMode.Score);
+            Console.WriteLine("Classic mode Score= " + classicMode.Score);
+            Console.WriteLine();
 
             Console.ReadKey();
         }
 
         public static void PrintQuantum(QuantumMode quantumMode)
         {
-
-            for (int i = 0; i <= quantumMode.Board.GetUpperBound(0); i++)
+            for (var i = 0; i <= quantumMode.Board.GetUpperBound(0); i++)
             {
-                for (int j = 0; j < quantumMode.Board.Length; j++)
+                for (var j = 0; j < quantumMode.Board.Length; j++)
                 {
-                    Console.Write(" { ");
+                    Console.Write("{ ");
                     foreach (var value in quantumMode.Board[i][j].TileSet)
                     {
                         Console.Write("|");
                         Console.Write(value);
 
                     }
-                    Console.Write(" }      ");
+                    Console.Write(" }  ");
                 }
 
                 Console.WriteLine();
             }
             Console.WriteLine();
-            Console.WriteLine(quantumMode.Score);
+            Console.WriteLine("Quantum mode Score= " + quantumMode.Score);
+            Console.WriteLine();
+
 
             Console.ReadKey();
         }

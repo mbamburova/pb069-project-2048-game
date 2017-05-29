@@ -12,16 +12,18 @@ namespace pb069_project_2048game.Model
         public int[][] Board { get; set; }
 
         public int Score { get; set; }
-        
+
+        private readonly int _rowLength;
     
         public ClassicMode()
         {
+            _rowLength = 4;
            Initialize();
         }
        
         public void MoveLeft()
         {
-            for (var row = 0; row < 4; row++)
+            for (var row = 0; row < _rowLength; row++)
             {
                 Board[row] = Move(Board[row]);
             }
@@ -33,7 +35,7 @@ namespace pb069_project_2048game.Model
 
             TransposeAndRotateBoard(Board);
             TransposeAndRotateBoard(Board);
-            for (var row = 0; row < 4; row++)
+            for (var row = 0; row < _rowLength; row++)
             {
                 Board[row] = Move(Board[row]);
             }
@@ -48,7 +50,7 @@ namespace pb069_project_2048game.Model
             TransposeAndRotateBoard(Board);
             TransposeAndRotateBoard(Board);
             TransposeAndRotateBoard(Board);
-            for (var row = 0; row < 4; row++)
+            for (var row = 0; row < _rowLength; row++)
             {
                 Board[row] = Move(Board[row]);
             }
@@ -60,7 +62,7 @@ namespace pb069_project_2048game.Model
         public void MoveDown()
         {
             TransposeAndRotateBoard(Board);
-            for (var row = 0; row < 4; row++)
+            for (var row = 0; row < _rowLength; row++)
             {
                 Board[row] = Move(Board[row]);
             }
@@ -86,8 +88,8 @@ namespace pb069_project_2048game.Model
 
         private void Initialize()
         {
-            Board = new int[4][];
-            for (var i = 0; i < 4; i++)
+            Board = new int[_rowLength][];
+            for (var i = 0; i < _rowLength; i++)
             {
                 Board[i] = new [] { 0, 0, 0, 0 };
             }
@@ -109,9 +111,10 @@ namespace pb069_project_2048game.Model
             Board[randRow][randCol] = 4 / rand.Next(1, 3);
         }
 
+        // moves selected row to the left
         private int[] Move(IEnumerable<int> row)
         {
-            var newRow = new int[4];
+            var newRow = new int[_rowLength];
             var j = 0;
             int? previous = null;
 
@@ -147,6 +150,7 @@ namespace pb069_project_2048game.Model
             return newRow;
         }
 
+        // transpose the matrix and rotate it by 90 degrees counter clock-wise
         private void TransposeAndRotateBoard(int[][] board)
         {
             var length = board[0].Length;
@@ -159,6 +163,7 @@ namespace pb069_project_2048game.Model
             CopyToBoard(retVal);
         }
 
+        // deep copy of matrix
         private void CopyToBoard(int[][] retVal)
         {
             Board = retVal.Select(x => x.ToArray()).ToArray();

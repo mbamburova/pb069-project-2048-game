@@ -9,18 +9,21 @@ namespace pb069_project_2048game.Model
 {
     public class QuantumMode : IGame
     {
+        public QuantumTile[][] Board { get; set; }
+
         public int Score { get; set; }
 
-        public QuantumTile[][] Board { get; set; }
+        private readonly int _rowLength;
 
         public QuantumMode()
         {
+            _rowLength = 4;
             Initialize();
         }
         
         public void MoveLeft()
         {
-            for (var row = 0; row < 4; row++)
+            for (var row = 0; row < _rowLength; row++)
             {
                 Board[row] = MoveRow(Board[row]);
             }
@@ -31,7 +34,7 @@ namespace pb069_project_2048game.Model
         {
             TransposeAndRotateBoard(Board);
             TransposeAndRotateBoard(Board);
-            for (var row = 0; row < 4; row++)
+            for (var row = 0; row < _rowLength; row++)
             {
                 Board[row] = MoveRow(Board[row]);
             }
@@ -46,7 +49,7 @@ namespace pb069_project_2048game.Model
             TransposeAndRotateBoard(Board);
             TransposeAndRotateBoard(Board);
             TransposeAndRotateBoard(Board);
-            for (var row = 0; row < 4; row++)
+            for (var row = 0; row < _rowLength; row++)
             {
                 Board[row] = MoveRow(Board[row]);
             }
@@ -57,7 +60,7 @@ namespace pb069_project_2048game.Model
         public void MoveDown()
         {
             TransposeAndRotateBoard(Board);
-            for (var row = 0; row < 4; row++)
+            for (var row = 0; row < _rowLength; row++)
             {
                 Board[row] = MoveRow(Board[row]);
             }
@@ -82,9 +85,9 @@ namespace pb069_project_2048game.Model
 
         private void Initialize()
         {
-            Board = new QuantumTile[4][];
+            Board = new QuantumTile[_rowLength][];
 
-            for (var i = 0; i < 4; i++)
+            for (var i = 0; i < _rowLength; i++)
             {
                 Board[i] = new[] { new QuantumTile(), new QuantumTile(), new QuantumTile(), new QuantumTile() };
             }
@@ -112,7 +115,7 @@ namespace pb069_project_2048game.Model
             }
         }
 
-
+        // the method moves selected row to the letf and returns resultant merged row 
         private QuantumTile[] MoveRow(QuantumTile[] row)
         {
             ShiftTiles(row);
@@ -157,6 +160,7 @@ namespace pb069_project_2048game.Model
             return matched == false ? row : MergeRowResults(subResults);
         }
 
+        // the method removes tiles with zero value and shift remainig in the selected row to the left
         private void ShiftTiles(QuantumTile[] row)
         {
             var temp = 0;
@@ -182,6 +186,7 @@ namespace pb069_project_2048game.Model
             }
         }
 
+        // unites row subresults and return new united row
         private QuantumTile[] MergeRowResults(QuantumTile[][] subResults)
         {
             var mergedResults = new[] { new QuantumTile(), new QuantumTile(), new QuantumTile(), new QuantumTile() };
@@ -195,6 +200,7 @@ namespace pb069_project_2048game.Model
             return mergedResults;
         }
 
+        // return tile as a result of two adjacent tiles
         private QuantumTile GetMatchOfTiles(QuantumTile tile1, QuantumTile tile2)
         {
             var matchedTile = new QuantumTile();
@@ -211,6 +217,7 @@ namespace pb069_project_2048game.Model
             return matchedTile;
         }
 
+        // transpose board and then rotate it 90 degrees counter clock-wise
         private void TransposeAndRotateBoard(QuantumTile[][] board)
         {
             var length = board[0].Length;
@@ -224,6 +231,7 @@ namespace pb069_project_2048game.Model
             CopyToBoard(retVal);
         }
 
+        // deep copy of matrix
         private void CopyToBoard(QuantumTile[][] retVal)
         {
             Board = retVal.Select(x => x.ToArray()).ToArray();
