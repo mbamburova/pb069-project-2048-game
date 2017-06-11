@@ -68,6 +68,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="2048Game\ClassicMode.cs" />
+    <Compile Include="2048Game\IGame.cs" />
+    <Compile Include="2048Game\QuantumMode.cs" />
+    <Compile Include="2048Game\QuantumTile.cs" />
+    <Compile Include="ObservableObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

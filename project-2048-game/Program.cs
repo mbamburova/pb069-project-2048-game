@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using pb069_project_2048game.Model;
+using pb069_project_2048game._2048Game;
 
 namespace pb069_project_2048game
 {

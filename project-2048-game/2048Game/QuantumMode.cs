@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace pb069_project_2048game.Model
+namespace pb069_project_2048game._2048Game
 {
-    public class QuantumMode : Game
+    public class QuantumMode : IGame
     {
         public QuantumTile[][] Board { get; set; }
 
@@ -21,7 +17,7 @@ namespace pb069_project_2048game.Model
             Initialize();
         }
         
-        public override void MoveLeft()
+        public void MoveLeft()
         {
             for (var row = 0; row < _rowLength; row++)
             {
@@ -30,7 +26,7 @@ namespace pb069_project_2048game.Model
             AddRandomTile();
         }
 
-        public override void MoveRight()
+        public void MoveRight()
         {
             TransposeAndRotateBoard(Board);
             TransposeAndRotateBoard(Board);
@@ -44,7 +40,7 @@ namespace pb069_project_2048game.Model
             AddRandomTile();
         }
 
-        public override void MoveUp()
+        public void MoveUp()
         {
             TransposeAndRotateBoard(Board);
             TransposeAndRotateBoard(Board);
@@ -57,7 +53,7 @@ namespace pb069_project_2048game.Model
             AddRandomTile();
         }
 
-        public override void MoveDown()
+        public void MoveDown()
         {
             TransposeAndRotateBoard(Board);
             for (var row = 0; row < _rowLength; row++)
@@ -70,13 +66,13 @@ namespace pb069_project_2048game.Model
 
             AddRandomTile();
         }
-        public override void CreateNewGame()
+        public void CreateNewGame()
         {
             Initialize();
             Score = 0;
         }
 
-        public override bool CheckWin()
+        public bool CheckWin()
         {
             return Score == 2048;
         }
