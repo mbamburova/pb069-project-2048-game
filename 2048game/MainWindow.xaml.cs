@@ -60,7 +60,6 @@ namespace _2048game
             {
                 _game.MoveRight();
             }
-
         }
     }
 }
