@@ -19,7 +19,7 @@ namespace _2048game._2048Game
 
         private void Refresh()
         {
-            PrintClassic();
+            PrintClassicBoard();
             OnPropertyChanged("BoardValues");
         }
 
@@ -54,16 +54,15 @@ namespace _2048game._2048Game
         public ClassicMode()
         {
             _rowLength = 4;
-            // Initialize();
         }
 
-        public void PrintClassic()
+        public void PrintClassicBoard()
         {
             for (var i = 0; i <= Board.GetUpperBound(0); i++)
             {
                 for (var j = 0; j < Board.Length; j++)
                 {
-                    if (BoardValues != null)
+                    if (BoardValues != null && BoardValues[i][j] != "0")
                     {
                         BoardValues[i][j] = $"{Board[i][j]}";
                     }
@@ -77,7 +76,7 @@ namespace _2048game._2048Game
 
         public void InitializeValues()
         {
-            Score = 10;
+            Score = 0;
             BoardValues = new string[_rowLength][];
             for (var i = 0; i < _rowLength; i++)
             {
@@ -105,7 +104,6 @@ namespace _2048game._2048Game
             }
             TransposeAndRotateBoard(Board);
             TransposeAndRotateBoard(Board);
-
             AddRandomTile();
         }
 
@@ -119,7 +117,6 @@ namespace _2048game._2048Game
                 Board[row] = Move(Board[row]);
             }
             TransposeAndRotateBoard(Board);
-
             AddRandomTile();
         }
 
@@ -133,7 +130,6 @@ namespace _2048game._2048Game
             TransposeAndRotateBoard(Board);
             TransposeAndRotateBoard(Board);
             TransposeAndRotateBoard(Board);
-
             AddRandomTile();
         }
 
@@ -144,12 +140,9 @@ namespace _2048game._2048Game
 
         public void CreateNewGame()
         {
-            // Initialize();
-            Score = 10;
-            Board[0][0] = 1;
+            Score = 0;
             AddRandomTile();
             AddRandomTile();
-            Refresh();
         }
 
         #region Helper methods 
@@ -162,10 +155,6 @@ namespace _2048game._2048Game
             {
                 newBoard[i] = new[] { 0, 0, 0, 0 };
             }
-
-            //AddRandomTile();
-            //AddRandomTile();
-            newBoard[0][0] = 10;
             return newBoard;
         }
 
@@ -180,6 +169,7 @@ namespace _2048game._2048Game
                 randCol = rand.Next(0, 3);
             } while (Board[randRow][randCol] != 0);
             Board[randRow][randCol] = 4 / rand.Next(1, 3);
+            Refresh();
         }
 
         // moves selected row to the left

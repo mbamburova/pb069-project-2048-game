@@ -118,9 +118,6 @@ namespace _2048game._2048Game
             {
                 board[i] = new[] { new QuantumTile(), new QuantumTile(), new QuantumTile(), new QuantumTile() };
             }
-
-            //AddRandomTile();
-            //AddRandomTile();
             return board;
         }
 
