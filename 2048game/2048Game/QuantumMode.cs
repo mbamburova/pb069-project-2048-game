@@ -5,18 +5,49 @@ namespace _2048game._2048Game
 {
     public class QuantumMode : ObservableObject, IGame
     {
-        public QuantumTile[][] Board { get; set; }
+        private int _score;
+        public int Score
+        {
+            get { return _score; }
+            set
+            {
+                _score = value;
+                OnPropertyChanged("Score");
+            }
+        }
 
-        public int Score { get; set; }
+        private QuantumTile[][] _board;
+        public QuantumTile[][] Board
+        {
+            get { return _board ?? (_board = Initialize()); }
+            set
+            {
+                _board = value;
+                Refresh();
+            }
+        }
 
+        private string[][] _boardValues;
+        public string[][] BoardValues
+        {
+            get
+            {
+                if (_boardValues == null) InitializeValues();
+                return _boardValues;
+            }
+            set
+            {
+                _boardValues = value;
+            }
+        }
+     
         private readonly int _rowLength;
 
         public QuantumMode()
         {
             _rowLength = 4;
-            Initialize();
         }
-        
+
         public void MoveLeft()
         {
             for (var row = 0; row < _rowLength; row++)
@@ -36,7 +67,6 @@ namespace _2048game._2048Game
             }
             TransposeAndRotateBoard(Board);
             TransposeAndRotateBoard(Board);
-
             AddRandomTile();
         }
 
@@ -63,12 +93,13 @@ namespace _2048game._2048Game
             TransposeAndRotateBoard(Board);
             TransposeAndRotateBoard(Board);
             TransposeAndRotateBoard(Board);
-
             AddRandomTile();
         }
+
         public void CreateNewGame()
         {
-            Initialize();
+            AddRandomTile();
+            AddRandomTile();
             Score = 0;
         }
 
@@ -79,17 +110,18 @@ namespace _2048game._2048Game
 
         #region Helper methods
 
-        private void Initialize()
+        private QuantumTile[][] Initialize()
         {
-            Board = new QuantumTile[_rowLength][];
+            var board = new QuantumTile[_rowLength][];
 
             for (var i = 0; i < _rowLength; i++)
             {
-                Board[i] = new[] { new QuantumTile(), new QuantumTile(), new QuantumTile(), new QuantumTile() };
+                board[i] = new[] { new QuantumTile(), new QuantumTile(), new QuantumTile(), new QuantumTile() };
             }
 
-            AddRandomTile();
-            AddRandomTile();
+            //AddRandomTile();
+            //AddRandomTile();
+            return board;
         }
 
         private void AddRandomTile()
@@ -109,6 +141,7 @@ namespace _2048game._2048Game
                 var randVal = 8 / rand.Next(1, 4);
                 Board[randomRow][randomCol].TileSet.Add(randVal);
             }
+            Refresh();
         }
 
         // the method moves selected row to the letf and returns resultant merged row 
@@ -187,9 +220,10 @@ namespace _2048game._2048Game
         {
             var mergedResults = new[] { new QuantumTile(), new QuantumTile(), new QuantumTile(), new QuantumTile() };
 
-            for (var i = 0; i < subResults.GetLength(0); i++) 
+            for (var i = 0; i < subResults.GetLength(0); i++)
             {
-                foreach (var t in subResults) {
+                foreach (var t in subResults)
+                {
                     mergedResults[i].TileSet.UnionWith(t[i].TileSet);
                 }
             }
@@ -233,7 +267,37 @@ namespace _2048game._2048Game
             Board = retVal.Select(x => x.ToArray()).ToArray();
         }
 
-        #endregion
+        public void InitializeValues()
+        {
+            Score = 8;
+            BoardValues = new string[_rowLength][];
+            for (var i = 0; i < _rowLength; i++)
+            {
+                BoardValues[i] = new[] { "0", "0", "0", "0" };
+            }
+        }
 
+        public void PrintQuantumBoard()
+        {
+            for (var i = 0; i <= Board.GetUpperBound(0); i++)
+            {
+                for (var j = 0; j < Board.Length; j++)
+                {
+                    BoardValues[i][j] = "";
+                    foreach (var value in Board[i][j].TileSet)
+                    {
+                        BoardValues[i][j] += $"{value}  ";
+                    }
+                }
+
+            }
+        }
+
+        private void Refresh()
+        {
+            PrintQuantumBoard();
+            OnPropertyChanged("BoardValues");
+        }
+        #endregion
     }
 }
