@@ -12,6 +12,9 @@ namespace pb069_project_2048game
     {
         static void Main(string[] args)
         {
+
+            // Used just for testing
+
             Console.WriteLine("Classic mode");
             var classic = new ClassicMode();
             PrintClassic(classic);

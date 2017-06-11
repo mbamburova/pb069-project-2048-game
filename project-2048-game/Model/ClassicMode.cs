@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace pb069_project_2048game.Model
 {
-    public class ClassicMode : IGame
+    public class ClassicMode : Game
     {
         public int[][] Board { get; set; }
 
@@ -21,7 +21,7 @@ namespace pb069_project_2048game.Model
            Initialize();
         }
        
-        public void MoveLeft()
+        public override void MoveLeft()
         {
             for (var row = 0; row < _rowLength; row++)
             {
@@ -30,7 +30,7 @@ namespace pb069_project_2048game.Model
             AddRandomTile();
         }
 
-        public void MoveRight()
+        public override void MoveRight()
         {
 
             TransposeAndRotateBoard(Board);
@@ -45,7 +45,7 @@ namespace pb069_project_2048game.Model
             AddRandomTile();
         }
 
-        public void MoveUp()
+        public override void MoveUp()
         {
             TransposeAndRotateBoard(Board);
             TransposeAndRotateBoard(Board);
@@ -59,7 +59,7 @@ namespace pb069_project_2048game.Model
             AddRandomTile();
         }
 
-        public void MoveDown()
+        public override void MoveDown()
         {
             TransposeAndRotateBoard(Board);
             for (var row = 0; row < _rowLength; row++)
@@ -73,12 +73,12 @@ namespace pb069_project_2048game.Model
             AddRandomTile();
         }
 
-        public bool CheckWin()
+        public override bool CheckWin()
         {
             return Score == 2048;
         }
 
-        public void CreateNewGame()
+        public override void CreateNewGame()
         {
             Initialize();
             Score = 0;
