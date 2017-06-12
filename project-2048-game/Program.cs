@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using pb069_project_2048game._2048Game;
 
 namespace pb069_project_2048game
@@ -12,7 +7,6 @@ namespace pb069_project_2048game
     {
         static void Main(string[] args)
         {
-
             // Used just for testing
 
             Console.WriteLine("Classic mode");
@@ -107,7 +101,6 @@ namespace pb069_project_2048game
             Console.WriteLine();
             Console.WriteLine("Quantum mode Score= " + quantumMode.Score);
             Console.WriteLine();
-
 
             Console.ReadKey();
         }

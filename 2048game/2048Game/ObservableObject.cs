@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace _2048game
+namespace _2048game._2048Game
 {
     public class ObservableObject : INotifyPropertyChanged
     {

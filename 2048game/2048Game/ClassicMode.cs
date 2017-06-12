@@ -119,6 +119,18 @@ namespace _2048game._2048Game
             return false;
         }
 
+        #region Helper methods 
+
+        private int[][] Initialize()
+        {
+            var board = new int[_rowLength][];
+            for (var i = 0; i < _rowLength; i++)
+            {
+                board[i] = new[] { 0, 0, 0, 0 };
+            }
+            return board;
+        }
+
         private bool CheckFull()
         {
             for (var row = 0; row < _rowLength; row++)
@@ -132,18 +144,6 @@ namespace _2048game._2048Game
                 }
             }
             return true;
-        }
-
-        #region Helper methods 
-
-        private int[][] Initialize()
-        {
-            var board = new int[_rowLength][];
-            for (var i = 0; i < _rowLength; i++)
-            {
-                board[i] = new[] { 0, 0, 0, 0 };
-            }
-            return board;
         }
 
         private void AddRandomTile()

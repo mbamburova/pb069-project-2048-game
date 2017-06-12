@@ -9,30 +9,29 @@
     <Window.Resources >
         <Style TargetType="Label" x:Key="valueLabel">
             <Setter Property="FontSize" Value="14" />
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment"  Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment"  Value="Stretch"/>
             <Setter Property="Background" Value="DarkCyan"/>
-            <Setter Property="Height" Value="45"/>
-            <Setter Property="Width" Value="67"/>
+            <Setter Property="Margin" Value="5,5,5,5"/>
         </Style >
     </Window.Resources>
     <Grid Background="#FFDCE9F1">
-        <Grid HorizontalAlignment="Left" Height="235" Margin="23,68,0,0" VerticalAlignment="Top" Width="330" Background="#FFAED9F3">
+        <Grid Margin="23,68,165.4,17.8" Background="#FFAED9F3">
             <Grid.RowDefinitions>
-                <RowDefinition Height="6*"/>
-                <RowDefinition Height="54.4"/>
+                <RowDefinition Height="2"/>
                 <RowDefinition Height="57*"/>
-                <RowDefinition Height="58*"/>
-                <RowDefinition Height="54*"/>
-                <RowDefinition Height="6"/>
+                <RowDefinition Height="57*"/>
+                <RowDefinition Height="57*"/>
+                <RowDefinition Height="57*"/>
+                <RowDefinition Height="2"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="2"/>
                 <ColumnDefinition Width="78*"/>
                 <ColumnDefinition Width="78*"/>
                 <ColumnDefinition Width="78*"/>
                 <ColumnDefinition Width="78*"/>
-                <ColumnDefinition Width="6"/>
+                <ColumnDefinition Width="2"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="1" Grid.Row="1" Style="{StaticResource valueLabel}">
                 <Label.Content>
@@ -115,10 +114,10 @@
                 </Label.Content>
             </Label>
         </Grid>
-        <Button x:Name="ClassicMode" Content="Classic Mode" HorizontalAlignment="Left" Height="35" Margin="382,147,0,0" VerticalAlignment="Top" Width="96" Click="Button_Click"/>
-        <Label Content="Score" HorizontalAlignment="Center" Height="55" Margin="382,68,40.4,197.8" VerticalAlignment="Center" Width="96" Background="#FF8B2828" FontSize="14"/>
-        <TextBlock TextWrapping="Wrap" Text="{Binding Score}" Background="#FFA34D4D" Margin="382,95,40.4,197.8"/>
-        <Button x:Name="QuantumMode" Content="Quantum Mode" HorizontalAlignment="Left" Height="30" Margin="382,204,0,0" VerticalAlignment="Top" Width="96" Click="button_Click_1" />
+        <Button x:Name="ClassicMode" Content="Classic Mode" HorizontalAlignment="Right" Height="35" Margin="0,147,40.4,0" VerticalAlignment="Top" Width="96" Click="Button_Click"/>
+        <Label Content="Score" HorizontalAlignment="Right" Margin="0,68,40.4,0" Width="96" Background="#FF8B2828" FontSize="14" Height="55" VerticalAlignment="Top"/>
+        <TextBlock TextWrapping="Wrap" Text="{Binding Score}" Background="#FFA34D4D" FontSize="16" Margin="0,95,40.4,0" HorizontalAlignment="Right" Width="96" Height="28" VerticalAlignment="Top"/>
+        <Button x:Name="QuantumMode" Content="Quantum Mode" HorizontalAlignment="Right" Height="30" Margin="0,204,40.4,0" VerticalAlignment="Top" Width="96" Click="button_Click_1" />
         <Label Content="2048 Game" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,23,0,0" FontSize="18"/>
     </Grid>
 </Window>
