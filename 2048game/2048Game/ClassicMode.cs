@@ -119,7 +119,7 @@ namespace _2048game._2048Game
             return false;
         }
 
-        public bool CheckLoose()
+        private bool CheckFull()
         {
             for (var row = 0; row < _rowLength; row++)
             {
@@ -149,14 +149,17 @@ namespace _2048game._2048Game
         private void AddRandomTile()
         {
             var rand = new Random();
-            int randRow, randCol;
 
-            do
+            if (!CheckFull())
             {
-                randRow = rand.Next(0, 4);
-                randCol = rand.Next(0, 4);
-            } while (Board[randRow][randCol] != 0);
-            Board[randRow][randCol] = 4 / rand.Next(1, 3);
+                int randRow, randCol;
+                do
+                {
+                    randRow = rand.Next(0, 4);
+                    randCol = rand.Next(0, 4);
+                } while (Board[randRow][randCol] != 0);
+                Board[randRow][randCol] = 4 / rand.Next(1, 3);
+            }
             Refresh();
         }
 
@@ -218,6 +221,7 @@ namespace _2048game._2048Game
             Board = retVal.Select(x => x.ToArray()).ToArray();
         }
 
+        // initialize board on the view
         public void InitializeValues()
         {
             Score = 0;
@@ -228,6 +232,7 @@ namespace _2048game._2048Game
             }
         }
 
+        // print board on the view
         public void PrintClassicBoard()
         {
             for (var i = 0; i <= Board.GetUpperBound(0); i++)
@@ -243,6 +248,7 @@ namespace _2048game._2048Game
             }
         }
 
+        // refresh printed board
         private void Refresh()
         {
             PrintClassicBoard();

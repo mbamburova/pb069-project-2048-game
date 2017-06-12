@@ -26,55 +26,48 @@ namespace _2048game
         public MainWindow()
         {
             InitializeComponent();
+            QuantumMode.FocusVisualStyle = null;
+            ClassicMode.FocusVisualStyle = null;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             _game = new ClassicMode();
             _game.CreateNewGame();
-            this.DataContext = _game;
+            DataContext = _game;
         }
 
         private void button_Click_1(object sender, RoutedEventArgs e)
         {
             _game = new QuantumMode();
             _game.CreateNewGame();
-            this.DataContext = _game;
+            DataContext = _game;
         }
 
         private void keyUpEventHandler(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Up)
-            {
-                _game.MoveUp();
-            }
-            else if (e.Key == Key.Down)
-            {
-                _game.MoveDown();
-            }
-            else if (e.Key == Key.Left)
-            {
-                _game.MoveLeft();
-            }
-            else if (e.Key == Key.Right)
-            {
-                _game.MoveRight();
+            switch (e.Key) {
+                case Key.Up:
+                    _game.MoveUp();
+                    break;
+                case Key.Down:
+                    _game.MoveDown();
+                    break;
+                case Key.Left:
+                    _game.MoveLeft();
+                    break;
+                case Key.Right:
+                    _game.MoveRight();
+                    break;
             }
             CheckWin();
         }
 
         private void CheckWin()
         {
-            if (_game.CheckWin())
-            {
-                Window1 form = new Window1("You win! :)");
-                form.Show();
-            }
-            if (_game.CheckLoose())
-            {
-                Window1 form = new Window1("You loose. :(");
-                form.Show();
-            }
+            if (!_game.CheckWin()) return;
+            var form = new Window1("You win! :)");
+            form.Show();
         }
     }
 }

@@ -118,7 +118,7 @@ namespace _2048game._2048Game
             return false;
         }
 
-        public bool CheckLoose()
+        private bool CheckFull()
         {
             for (var row = 0; row < _rowLength; row++)
             {
@@ -149,18 +149,22 @@ namespace _2048game._2048Game
         private void AddRandomTile()
         {
             var rand = new Random();
-            int randomRow, randomCol;
-            do
+            
+            if (!CheckFull())
             {
-                randomRow = rand.Next(0, 4);
-                randomCol = rand.Next(0, 4);
-            } while (!Board[randomRow][randomCol].TileSet.Count.Equals(0));
+                int randomRow, randomCol;
+                do
+                {
+                    randomRow = rand.Next(0, 4);
+                    randomCol = rand.Next(0, 4);
+                } while (!Board[randomRow][randomCol].TileSet.Count.Equals(0));
 
-            var randomCount = new Random().Next(1, 8);
-            for (var i = 0; i < randomCount; i++)
-            {
-                var randVal = 8 / rand.Next(1, 4);
-                Board[randomRow][randomCol].TileSet.Add(randVal);
+                var randomCount = new Random().Next(1, 8);
+                for (var i = 0; i < randomCount; i++)
+                {
+                    var randVal = 8 / rand.Next(1, 4);
+                    Board[randomRow][randomCol].TileSet.Add(randVal);
+                }
             }
             Refresh();
         }
@@ -288,6 +292,7 @@ namespace _2048game._2048Game
             Board = retVal.Select(x => x.ToArray()).ToArray();
         }
 
+        // initialize board on the view
         public void InitializeValues()
         {
             Score = 0;
@@ -298,6 +303,7 @@ namespace _2048game._2048Game
             }
         }
 
+        // print board on the view
         public void PrintQuantumBoard()
         {
             for (var i = 0; i <= Board.GetUpperBound(0); i++)
@@ -314,6 +320,7 @@ namespace _2048game._2048Game
             }
         }
 
+        // refresh printed board
         private void Refresh()
         {
             PrintQuantumBoard();

@@ -115,10 +115,10 @@
                 </Label.Content>
             </Label>
         </Grid>
-        <Button Content="Classic Mode" HorizontalAlignment="Left" Height="35" Margin="382,147,0,0" VerticalAlignment="Top" Width="96" Click="Button_Click"/>
+        <Button x:Name="ClassicMode" Content="Classic Mode" HorizontalAlignment="Left" Height="35" Margin="382,147,0,0" VerticalAlignment="Top" Width="96" Click="Button_Click"/>
         <Label Content="Score" HorizontalAlignment="Center" Height="55" Margin="382,68,40.4,197.8" VerticalAlignment="Center" Width="96" Background="#FF8B2828" FontSize="14"/>
         <TextBlock TextWrapping="Wrap" Text="{Binding Score}" Background="#FFA34D4D" Margin="382,95,40.4,197.8"/>
-        <Button x:Name="button" Content="Quantum Mode" HorizontalAlignment="Left" Height="30" Margin="382,204,0,0" VerticalAlignment="Top" Width="96" Click="button_Click_1"/>
+        <Button x:Name="QuantumMode" Content="Quantum Mode" HorizontalAlignment="Left" Height="30" Margin="382,204,0,0" VerticalAlignment="Top" Width="96" Click="button_Click_1" />
         <Label Content="2048 Game" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,23,0,0" FontSize="18"/>
     </Grid>
 </Window>

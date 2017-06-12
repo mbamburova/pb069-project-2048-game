@@ -13,8 +13,5 @@
         void CreateNewGame();
 
         bool CheckWin();
-
-        bool CheckLoose();
-
     }
 }
