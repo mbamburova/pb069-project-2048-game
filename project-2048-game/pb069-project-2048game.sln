@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pb069-project-2048game", "pb069-project-2048game.csproj", "{5A699986-8C15-4C2A-AABF-848A4DAE50F3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "console-app-2048", "console-app-2048.csproj", "{5A699986-8C15-4C2A-AABF-848A4DAE50F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2048game", "..\2048game\2048game.csproj", "{86CEC3F3-D26F-44EC-96AF-43F13B9430D0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wpf-app-2048", "..\2048game\wpf-app-2048.csproj", "{86CEC3F3-D26F-44EC-96AF-43F13B9430D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
