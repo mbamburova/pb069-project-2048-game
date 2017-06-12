@@ -48,17 +48,32 @@ namespace _2048game
             {
                 _game.MoveUp();
             }
-            if (e.Key == Key.Down)
+            else if (e.Key == Key.Down)
             {
                 _game.MoveDown();
             }
-            if (e.Key == Key.Left)
+            else if (e.Key == Key.Left)
             {
                 _game.MoveLeft();
             }
-            if (e.Key == Key.Right)
+            else if (e.Key == Key.Right)
             {
                 _game.MoveRight();
+            }
+            CheckWin();
+        }
+
+        private void CheckWin()
+        {
+            if (_game.CheckWin())
+            {
+                Window1 form = new Window1("You win! :)");
+                form.Show();
+            }
+            if (_game.CheckLoose())
+            {
+                Window1 form = new Window1("You loose. :(");
+                form.Show();
             }
         }
     }

@@ -6,25 +6,7 @@ namespace _2048game._2048Game
 {
     public class ClassicMode : ObservableObject, IGame
     {
-        private int[][] _board;
-        public int[][] Board
-        {
-            get { return _board ?? (_board = Initialize()); }
-            set
-            {
-                _board = value;
-
-            }
-        }
-
-        private void Refresh()
-        {
-            PrintClassicBoard();
-            OnPropertyChanged("BoardValues");
-        }
-
         private int _score;
-
         public int Score
         {
             get { return _score; }
@@ -35,6 +17,17 @@ namespace _2048game._2048Game
             }
         }
 
+        private int[][] _board;
+        public int[][] Board
+        {
+            get { return _board ?? (_board = Initialize()); }
+            set
+            {
+                _board = value;
+                Refresh();
+            }
+        }
+        
         private string[][] _boardValues;
         public string[][] BoardValues
         {
@@ -56,34 +49,6 @@ namespace _2048game._2048Game
             _rowLength = 4;
         }
 
-        public void PrintClassicBoard()
-        {
-            for (var i = 0; i <= Board.GetUpperBound(0); i++)
-            {
-                for (var j = 0; j < Board.Length; j++)
-                {
-                    if (BoardValues != null && BoardValues[i][j] != "0")
-                    {
-                        BoardValues[i][j] = $"{Board[i][j]}";
-                    }
-                    else
-                    {
-                        InitializeValues();
-                    }
-                }
-            }
-        }
-
-        public void InitializeValues()
-        {
-            Score = 0;
-            BoardValues = new string[_rowLength][];
-            for (var i = 0; i < _rowLength; i++)
-            {
-                BoardValues[i] = new[] { "0", "0", "0", "0" };
-            }
-        }
-
         public void MoveLeft()
         {
             for (var row = 0; row < _rowLength; row++)
@@ -95,7 +60,6 @@ namespace _2048game._2048Game
 
         public void MoveRight()
         {
-
             TransposeAndRotateBoard(Board);
             TransposeAndRotateBoard(Board);
             for (var row = 0; row < _rowLength; row++)
@@ -133,29 +97,53 @@ namespace _2048game._2048Game
             AddRandomTile();
         }
 
-        public bool CheckWin()
-        {
-            return Score == 2048;
-        }
-
         public void CreateNewGame()
         {
+            AddRandomTile();
+            AddRandomTile();
             Score = 0;
-            AddRandomTile();
-            AddRandomTile();
+        }
+
+        public bool CheckWin()
+        {
+            for (var row = 0; row < _rowLength; row++)
+            {
+                for (var col = 0; col < _rowLength; col++)
+                {
+                    if (Board[row][col] == 2048)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool CheckLoose()
+        {
+            for (var row = 0; row < _rowLength; row++)
+            {
+                for (var col = 0; col < _rowLength; col++)
+                {
+                    if (Board[row][col] == 0)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
 
         #region Helper methods 
 
         private int[][] Initialize()
         {
-            Score = 10;
-            var newBoard = new int[_rowLength][];
+            var board = new int[_rowLength][];
             for (var i = 0; i < _rowLength; i++)
             {
-                newBoard[i] = new[] { 0, 0, 0, 0 };
+                board[i] = new[] { 0, 0, 0, 0 };
             }
-            return newBoard;
+            return board;
         }
 
         private void AddRandomTile()
@@ -165,8 +153,8 @@ namespace _2048game._2048Game
 
             do
             {
-                randRow = rand.Next(0, 3);
-                randCol = rand.Next(0, 3);
+                randRow = rand.Next(0, 4);
+                randCol = rand.Next(0, 4);
             } while (Board[randRow][randCol] != 0);
             Board[randRow][randCol] = 4 / rand.Next(1, 3);
             Refresh();
@@ -230,6 +218,36 @@ namespace _2048game._2048Game
             Board = retVal.Select(x => x.ToArray()).ToArray();
         }
 
+        public void InitializeValues()
+        {
+            Score = 0;
+            BoardValues = new string[_rowLength][];
+            for (var i = 0; i < _rowLength; i++)
+            {
+                BoardValues[i] = new[] { "0", "0", "0", "0" };
+            }
+        }
+
+        public void PrintClassicBoard()
+        {
+            for (var i = 0; i <= Board.GetUpperBound(0); i++)
+            {
+                for (var j = 0; j < Board.Length; j++)
+                {
+                    BoardValues[i][j] = "";
+                    if (Board[i][j] != 0)
+                    {
+                        BoardValues[i][j] = $"{Board[i][j]}";
+                    }
+                }
+            }
+        }
+
+        private void Refresh()
+        {
+            PrintClassicBoard();
+            OnPropertyChanged("BoardValues");
+        }
         #endregion
     }
 }

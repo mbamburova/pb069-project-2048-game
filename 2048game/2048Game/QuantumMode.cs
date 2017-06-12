@@ -105,7 +105,32 @@ namespace _2048game._2048Game
 
         public bool CheckWin()
         {
-            return Score == 2048;
+            for (var row = 0; row < _rowLength; row++)
+            {
+                for (var col = 0; col < _rowLength; col++)
+                {
+                    if (Board[row][col].TileSet.Contains(2048))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool CheckLoose()
+        {
+            for (var row = 0; row < _rowLength; row++)
+            {
+                for (var col = 0; col < _rowLength; col++)
+                {
+                    if (Board[row][col].TileSet.Count == 0)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
 
         #region Helper methods
@@ -124,8 +149,7 @@ namespace _2048game._2048Game
         private void AddRandomTile()
         {
             var rand = new Random();
-            int randomRow;
-            int randomCol;
+            int randomRow, randomCol;
             do
             {
                 randomRow = rand.Next(0, 4);
@@ -220,7 +244,7 @@ namespace _2048game._2048Game
             for (var i = 0; i < subResults.GetLength(0); i++)
             {
                 foreach (var t in subResults)
-                {
+                { 
                     mergedResults[i].TileSet.UnionWith(t[i].TileSet);
                 }
             }
@@ -266,7 +290,7 @@ namespace _2048game._2048Game
 
         public void InitializeValues()
         {
-            Score = 8;
+            Score = 0;
             BoardValues = new string[_rowLength][];
             for (var i = 0; i < _rowLength; i++)
             {

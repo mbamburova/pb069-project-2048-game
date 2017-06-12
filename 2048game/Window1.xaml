@@ -1,0 +1,13 @@
+﻿<Window x:Class="_2048game.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_2048game"
+        mc:Ignorable="d"
+        Title="Window1" Height="200" Width="300">
+    <Grid HorizontalAlignment="Right" Margin="0,0,-0.4,0" Width="294" Height="270" VerticalAlignment="Top">
+        <Label Name="myLabel" Content="Label" FontSize="18" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="64,45,62,189" Height="36" Width="168"/>
+        <Button Content="Back" Margin="69,103,62,132" Click="Button_Click" RenderTransformOrigin="0.504,-2.995"/>
+    </Grid>
+</Window>

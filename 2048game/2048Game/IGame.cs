@@ -14,5 +14,7 @@
 
         bool CheckWin();
 
+        bool CheckLoose();
+
     }
 }
